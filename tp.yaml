@@ -1,0 +1,18 @@
+---
+- hosts: test
+  become: yes
+  tasks:
+    - name: installer serveur apache
+      apt: name=apache2 update_cache=yes state=latest
+    - name: installer haproxy
+      apt: name=haproxy
+    - name: installer prometheus
+      apt: name=prometheus
+    - name: creation dossier /tmp/alexandre
+      ansible.builtin.file:
+        path: /tmp/{{ item }}
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+      loop: [ alexandre , soufiane ]
